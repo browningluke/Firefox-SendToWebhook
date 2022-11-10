@@ -9,8 +9,8 @@ browser.runtime.onMessage.addListener((message, sender, reply) => {
 
     // Create root context menu 
     const rootID = browser.contextMenus.create({
-        id: "send-link-to-discord",
-        title: "Send link to Discord",
+        id: `${BROWSER_CONTEXT_ID_PREFIX}root`,
+        title: "Send link to Webhook",
         contexts: ["all"],
     });
 
@@ -18,7 +18,7 @@ browser.runtime.onMessage.addListener((message, sender, reply) => {
     browser.storage.local.get(BROWSER_STORAGE_KEY)
     .then((item) => {
         // Create all context menus
-        for (const x in item.stdConfig) {
+        for (const x in item[BROWSER_STORAGE_KEY]) {
             browser.contextMenus.create({
                 id: `${BROWSER_CONTEXT_ID_PREFIX}${x}`,
                 title: x,
@@ -29,15 +29,16 @@ browser.runtime.onMessage.addListener((message, sender, reply) => {
     });
 });
 
-function sendToDiscord(url, content) {
-    let data = {
-        "content": content,
-        "embeds": null,
-        "attachments": []
-    };
+function sendToWebhook(url, content, method="POST", format={"content": "<DATA>"}) {
+    let data = format;
+    for (const x in data) {
+        if (data[x] == "<DATA>") {
+            data[x] = content;
+        }
+    }
 
     fetch(url, {
-        method: 'POST',
+        method: method,
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data),
     }).then();
@@ -57,12 +58,9 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
     .then((item) => {
         // Send to correct channel
         const name = info.menuItemId.replace(BROWSER_CONTEXT_ID_PREFIX, '');
-        const url = item[BROWSER_STORAGE_KEY][name];
+        const webhook = item[BROWSER_STORAGE_KEY][name];
 
-        if (!url) return;
-        sendToDiscord(
-            url,
-            content
-        );
+        if (!webhook) return;
+        sendToWebhook(webhook.url, content, webhook.method, webhook.format);
     });
 });
