@@ -6,8 +6,6 @@ Sends hovered link (or current page if no link is hovered) to configured Webhook
 
 ## Installation from Source
 
-### From Source
-
 ### Step 1
 
 ```
