@@ -14,14 +14,14 @@ function onReady() {
     // Write JSON config to text if storage already exists
     browser.storage.local.get(BROWSER_STORAGE_KEY)
     .then((item) => {
-        if (!item) return;
+        if (!item[BROWSER_STORAGE_KEY]) return;
         
         let jsonPretty = JSON.stringify(item[BROWSER_STORAGE_KEY], null, 2);
         document.getElementById("jsondatatext").value = jsonPretty;
     });
     
     // Handle form submission
-    document.getElementById('std-options').addEventListener("submit", (event) => {
+    document.getElementById('stw-options').addEventListener("submit", (event) => {
         event.preventDefault();
         let userText = event.target.elements.jsondatatext.value;
         
