@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Context menu: Send to discord",
-    "description": "aa",
+    "name": "Send to Webhook",
+    "description": "Send selected link (or current page) to configured webhook.",
     "version": "1.0",
     "background": {
         "scripts": [
@@ -17,6 +17,12 @@
 
     "permissions": [
         "activeTab",
-        "contextMenus"
-    ]
+        "contextMenus",
+        "storage"
+    ],
+
+    "options_ui": {
+        "page": "options/options.html",
+        "browser_style": true
+    }
 }
