@@ -1,10 +1,12 @@
 # Send to Webhook - A Firefox Extension
-
+<div align="center">
+<a href="https://github.com/browningluke/Firefox-SendToWebhook/releases/latest/download/SendToWebhook.xpi"><img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" width="126px"></a> 
+</div>
 Sends hovered link (or current page if no link is hovered) to configured Webhook. The HTTP method and JSON body can be configured in the extension options.
 
-## Installation
+## Installation from Source
 
-Since this is a small project for myself, I am not going to get it signed, or publish it. Instead, install it manually.
+### From Source
 
 ### Step 1
 
