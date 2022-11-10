@@ -1,4 +1,4 @@
-# Send to Webhook
+# Send to Webhook - A Firefox Extension
 
 Sends hovered link (or current page if no link is hovered) to configured Webhook. The HTTP method and JSON body can be configured in the extension options.
 
