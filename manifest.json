@@ -9,12 +9,6 @@
         ]
     },
 
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "lrbrowning6@gmail.com"
-        }
-    },
-
     "permissions": [
         "activeTab",
         "contextMenus",
