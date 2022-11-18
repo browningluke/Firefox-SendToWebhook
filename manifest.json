@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Send to Webhook",
     "description": "Send selected link (or current page) to configured webhook.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "background": {
         "scripts": [
             "background.js"
