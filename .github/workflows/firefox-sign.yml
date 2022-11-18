@@ -1,0 +1,56 @@
+name: web-ext sign
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    tags: [ 'v*.*.*' ]   # Publish semver tags as releases.
+    paths-ignore:
+      - "docs/**"
+      - ".github/**"
+      - ".idea/**"
+      - "examples/**"
+      - "*.md"
+      - ".gitignore"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Install web-ext
+        run: |
+          npm install --global web-ext
+
+      - name: web-ext lint
+        run: |
+          web-ext lint
+
+      - name: web-ext sign
+        run: |
+          web-ext sign --channel="unlisted" --api-key=${{ secrets.API_KEY }} --api-secret=${{ secrets.API_SECRET }} --id=${{ secrets.EXT_ID }}
+          mv ./web-ext-artifacts/*.xpi ./SendToWebhook.xpi
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: SendToWebhook.xpi
+
+      # - name: Rename pdf
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   run: |
+      #     cp docs/browningluke-latest.pdf browningluke.pdf
+      
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   with:
+      #     files: browningluke.pdf
+      #     fail_on_unmatched_files: true
+      #     generate_release_notes: true
