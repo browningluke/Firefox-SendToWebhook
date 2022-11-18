@@ -3,7 +3,7 @@ name: web-ext sign
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "setup_github_actions" ]
     tags: [ 'v*.*.*' ]   # Publish semver tags as releases.
     paths-ignore:
       - "docs/**"
