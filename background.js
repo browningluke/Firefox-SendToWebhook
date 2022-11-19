@@ -1,7 +1,8 @@
 const BROWSER_CONTEXT_ID_PREFIX = "stw-";
 const BROWSER_STORAGE_KEY = "stwConfig";
 
-browser.runtime.onMessage.addListener((message, sender, reply) => {
+
+function setupContextMenu() {
     // Assume valid data is stored in browser.storage
     
     // Remove all context menu items
@@ -27,7 +28,10 @@ browser.runtime.onMessage.addListener((message, sender, reply) => {
             });
         }
     });
-});
+}
+
+browser.runtime.onMessage.addListener(setupContextMenu);
+browser.runtime.onStartup.addListener(setupContextMenu);
 
 function sendToWebhook(url, content, method="POST", format={"content": "<DATA>"}) {
     let data = format;
