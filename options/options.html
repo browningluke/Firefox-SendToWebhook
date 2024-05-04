@@ -5,11 +5,14 @@
 		<meta charset="utf-8">
         <script src="options.js"></script>
 	</head>
-	<body>        
+	<body>
         <form id="stw-options">
             <textarea id="jsondatatext" name="jsondatatext" rows="16" cols="75" placeholder="{Put Data here}"></textarea>
             <br>
-            <button type="submit" id="submit">Save</button>
+            <button type="submit" id="save">Save</button>
+			<button type="submit" id="save-cloud">Save to cloud</button>
+			<button type="submit" id="load-cloud">Load from cloud</button>
+			<p>Cloud bytes: <label id="cloud-in-use"></label></p>
 		</form>
 	</body>
 </html>
